@@ -1,0 +1,25 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=2]
+
+[ext_resource path="res://shaders/Background.gdshader" type="Shader" id=1]
+
+[sub_resource type="OpenSimplexNoise" id=2]
+period = 40.3
+
+[sub_resource type="NoiseTexture" id=1]
+seamless = true
+noise = SubResource( 2 )
+
+[sub_resource type="OpenSimplexNoise" id=3]
+seed = 10
+octaves = 9
+period = 0.1
+persistence = 0.369
+lacunarity = 1.87
+
+[sub_resource type="NoiseTexture" id=4]
+noise = SubResource( 3 )
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/noiseTexture = SubResource( 1 )
+shader_param/starNoiseTexture = SubResource( 4 )

@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://shaders/Player.gdshader" type="Shader" id=1]
+[ext_resource path="res://scripts/Player.gd" type="Script" id=2]
+
+[sub_resource type="OpenSimplexNoise" id=4]
+
+[sub_resource type="NoiseTexture" id=5]
+noise = SubResource( 4 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 1 )
+shader_param/player_color = Plane( 0.378, 0.034, 0.604, 2.245 )
+shader_param/flash_color = Plane( 1, 1, 1, 1 )
+shader_param/flash_amount = null
+shader_param/noiseTexture = SubResource( 5 )
+
+[sub_resource type="QuadMesh" id=3]
+
+[node name="Player" type="MeshInstance2D"]
+modulate = Color( 2.00392, 2.00392, 2.00392, 1 )
+material = SubResource( 2 )
+scale = Vector2( 75, 75 )
+z_index = 8
+mesh = SubResource( 3 )
+script = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PoolVector2Array( -0.45, 0.45, 0.45, 0.45, 0, -0.45 )
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
