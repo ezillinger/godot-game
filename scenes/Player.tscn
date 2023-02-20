@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://shaders/Player.gdshader" type="Shader" id=1]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=2]
-[ext_resource path="res://shaders/Flame.tres" type="Shader" id=3]
+[ext_resource path="res://shaders/Flame.gdshader" type="Shader" id=3]
 
 [sub_resource type="OpenSimplexNoise" id=4]
 
@@ -18,11 +18,30 @@ shader_param/noiseTexture = SubResource( 5 )
 
 [sub_resource type="QuadMesh" id=3]
 
+[sub_resource type="OpenSimplexNoise" id=12]
+seed = 139
+octaves = 8
+period = 59.3
+persistence = 0.0
+lacunarity = 1.92
+
+[sub_resource type="NoiseTexture" id=8]
+width = 474
+height = 225
+seamless = true
+noise = SubResource( 12 )
+
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 3 )
+shader_param/noiseTexture = SubResource( 8 )
 
 [sub_resource type="QuadMesh" id=7]
-size = Vector2( 100, 100 )
+
+[sub_resource type="OpenSimplexNoise" id=10]
+
+[sub_resource type="NoiseTexture" id=11]
+bump_strength = 0.0
+noise = SubResource( 10 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -36,8 +55,10 @@ scale = Vector2( 75, 75 )
 z_index = 8
 mesh = SubResource( 3 )
 
-[node name="Flame" type="MeshInstance2D" parent="."]
-modulate = Color( 0.186328, 1.4, 0.1, 1 )
+[node name="Flame" type="MeshInstance2D" parent="MeshInstance2D"]
+show_behind_parent = true
 material = SubResource( 6 )
-position = Vector2( -1, 53 )
+position = Vector2( -0.0133333, 0.52 )
+scale = Vector2( 0.608, 1.95275 )
 mesh = SubResource( 7 )
+texture = SubResource( 11 )

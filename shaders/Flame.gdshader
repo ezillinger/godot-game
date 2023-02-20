@@ -1,7 +1,4 @@
-[gd_resource type="Shader" format=2]
-
-[resource]
-code = "shader_type canvas_item;
+shader_type canvas_item;
 
 uniform sampler2D noiseTexture;
 
@@ -16,7 +13,7 @@ void fragment(){
 	uv.y += TIME;
 	
 	vec4 noise = texture(noiseTexture, uv);
-	COLOR = vec4(1.43,-0.23,0.2,1.0) + noise;
-	COLOR.a = 1.0;//alpha;
-	COLOR = vec4(1,0,0,1)
-}"
+	COLOR = vec4(1.64,-0.23,0.2,1.0) * noise * noise;
+	COLOR.a = alpha;
+	
+}

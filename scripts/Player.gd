@@ -70,7 +70,7 @@ func _physics_process(delta):
 		
 		
 	velocity = velocity.normalized() * speed * delta;
-	var collision = move_and_collide(velocity)
+	var _collision = move_and_collide(velocity)
 	
 	var seconds_per_shot = 1 / shots_per_second
 	if Input.is_action_pressed("shoot") and time_since_last_shot >= seconds_per_shot:

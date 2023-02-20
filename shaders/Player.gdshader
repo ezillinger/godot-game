@@ -18,8 +18,8 @@ void fragment(){
 	COLOR = vec4(0);
 	
 	if(uv.x < (-uv.y + 1.0) 
-	&& (mod(uv.x, 0.2) > 0.1 || uv.y > 0. - uv.x)
-	&& (uv.x > 0.1 || uv.y > 0. - uv.x)
+	//&& (mod(uv.x, 0.2) > 0.1 || uv.y > 0. - uv.x)
+	//&& (uv.x > 0.1 || uv.y > 0. - uv.x)
 	){
 		vec4 color = noise * 0.2 + player_color;
 		COLOR = color;

@@ -15,7 +15,7 @@ func hit(hit_damage):
 	if health <= 0:
 		queue_free()
 	
-func _process(delta):
+func _process(_delta):
 	pass #move_and_collide()
 		# Player.hit(damage)
 	
