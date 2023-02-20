@@ -56,7 +56,6 @@ func _process(_delta):
 			var enemy_in_scene = self.find_node("@Enemy@*", true, false)
 			if not enemy_in_scene:
 				GameState.level += 1
-				$Enemies
 				$Enemies.spawn_wave(GameState.level)
 
 					

@@ -1,8 +1,9 @@
-extends MeshInstance2D
+extends KinematicBody2D
 
 export var speed = 1000.0
-export var shot_speed = 1.5
+export var shots_per_second = 3.5
 export var health = 100
+export var max_health = 100
 export var dead = false
 export var invincible = false
 export var flash = false
@@ -20,7 +21,7 @@ func _ready():
 	hide()
 	
 func update_shaders():
-	var mat = get_material()
+	var mat = $MeshInstance2D.get_material()
 	if flash:
 		mat.set_shader_param("flash_amount", 1.0)
 		mat.set_shader_param("flash_color", Color.white)
@@ -30,7 +31,7 @@ func update_shaders():
 		mat.set_shader_param("flash_color", Color(0.0, 0.0, 0.0, 0.0))
 	else:
 		mat.set_shader_param("flash_amount", 0.0)
-		modulate = Color.white
+		modulate = Color.white * 1.35
 
 
 func hit(damage):
@@ -40,19 +41,22 @@ func hit(damage):
 		flash = true
 		invincible = true
 		if health <= 0:
+			health = 0
 			dead = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	
 	time_since_last_shot += delta
 	time_since_last_hit += delta
 	
-	var mouse_position = get_viewport().get_mouse_position();
-	
+	var mouse_position = get_viewport().get_mouse_position()
 	direction = (mouse_position - position).normalized()
 	
 	rotation = atan2(direction.y, direction.x) + PI / 2
+	
+	position.x = fmod(position.x + GameState.screen_dims.x, GameState.screen_dims.x)
+	position.y = fmod(position.y + GameState.screen_dims.y, GameState.screen_dims.y)
 	
 	var velocity = Vector2.ZERO
 	if Input.is_action_pressed("left"):
@@ -66,9 +70,9 @@ func _process(delta):
 		
 		
 	velocity = velocity.normalized() * speed * delta;
-	position += velocity
+	var collision = move_and_collide(velocity)
 	
-	var seconds_per_shot = 1 / shot_speed
+	var seconds_per_shot = 1 / shots_per_second
 	if Input.is_action_pressed("shoot") and time_since_last_shot >= seconds_per_shot:
 		var b = bullet.instance()
 		b.direction = direction
@@ -82,11 +86,3 @@ func _process(delta):
 		flash = false
 		
 	update_shaders()
-
-func _on_Area2D_area_entered(area):
-	return
-	print(area)
-	if area.name.begins_with("@Enemy"):
-		health -= 10
-		if health <= 0:
-			dead = true

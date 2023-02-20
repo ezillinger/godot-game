@@ -1,4 +1,4 @@
-extends Area2D
+extends KinematicBody2D
 class_name Enemy
 
 export var health = 100
@@ -9,11 +9,15 @@ var forces = Vector2.ZERO
 
 func _ready():
 	pass
-	
+
+func hit(hit_damage):
+	health -= hit_damage
+	if health <= 0:
+		queue_free()
 	
 func _process(delta):
-	if overlaps_area(Player.get_child(0)):
-		Player.hit(damage)
+	pass #move_and_collide()
+		# Player.hit(damage)
 	
 func _physics_process(delta):
 	var dir = Vector2.ZERO
@@ -28,19 +32,13 @@ func _physics_process(delta):
 	var rand_amt = rand_range(50.0, 200.0)
 	forces += (Vector2(rand_range(-1.0, 1.0), rand_range(-1.0, 1.0)) * 40.0 + forces).normalized() * rand_amt
 	
-	var new_pos = position + delta * forces
-	position = new_pos
+	var collision = move_and_collide(delta * forces)
+	if collision:
+		var hit_force = 1200.0
+		if collision.collider.name == "Player":
+			collision.collider.hit(damage)
+			hit_force *= 3.0
+		forces += collision.normal  * hit_force
+		# print(collision.get_instance_id() == Player.get_instance_id())
 	forces *= 0.5
-
-
-func _on_Enemy_area_entered(area):
-	if area.name.begins_with("@Bullet"):
-		print("ENEMY HIT BY BULLET")
-		forces += (position - area.position).normalized() * 1000.0;
-		health -= area.damage
-		if health <= 0:
-			self.queue_free()
-	elif area.name.begins_with("@Enemy"):
-		forces += (position - area.position).normalized() * 100.0;		
-	
 
