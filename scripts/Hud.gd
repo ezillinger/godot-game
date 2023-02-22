@@ -17,6 +17,10 @@ func _process(_delta):
 	
 	$HealthBar.value = Player.health
 	$HealthLabel.text = "%s/%s" % [Player.health, Player.max_health]
+	
+	$ExperienceBar.value = Player.experience
+	$ExperienceBar.max_value = Player.max_experience
+	
 	if max_health != Player.max_health:
 		var scale = float(Player.max_health) / max_health
 		print(scale)

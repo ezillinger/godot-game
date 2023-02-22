@@ -4,6 +4,7 @@ class_name Enemy
 export var health = 100
 export var speed = 100
 export var damage = 30
+export var level = 1
 
 var forces = Vector2.ZERO
 
@@ -13,6 +14,7 @@ func _ready():
 func hit(hit_damage):
 	health -= hit_damage
 	if health <= 0:
+		Pickups.spawn(position, level)
 		queue_free()
 	
 func _process(_delta):
@@ -38,7 +40,7 @@ func _physics_process(delta):
 		if collision.collider.name == "Player":
 			collision.collider.hit(damage)
 			hit_force *= 3.0
-		forces += collision.normal  * hit_force
+		forces += collision.normal * hit_force
 		# print(collision.get_instance_id() == Player.get_instance_id())
 	forces *= 0.5
 

@@ -39,10 +39,8 @@ script = ExtResource( 2 )
 modulate = Color( 1.20392, 1.20784, 1.18431, 1 )
 position = Vector2( 0, -1 )
 frames = SubResource( 5 )
-frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -1 )
-scale = Vector2( 1, 1 )
 shape = SubResource( 6 )

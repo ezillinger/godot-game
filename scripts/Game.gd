@@ -1,6 +1,7 @@
 extends Node2D
 
 const MainState = GameState.MainState
+var time_in_level = 0.0
 
 func new_game():
 	Player.health = 100.0
@@ -8,7 +9,7 @@ func new_game():
 	Player.position = GameState.screen_dims / 2.0
 	Player.show()
 	
-	for enemy in $Enemies.get_children():
+	for enemy in Enemies.get_children():
 		enemy.queue_free()
 	GameState.level = 0
 	
@@ -27,24 +28,27 @@ func change_states(new_state):
 		MainState.PAUSE:
 			$UI/PauseMenu.hide()
 			
-			
+	var pause = false		
 	if new_state == MainState.GAMEPLAY:
-		get_tree().paused = false
+		pause = false
 	elif new_state == MainState.GAME_OVER:
-		get_tree().paused = true
+		pause = true
 		$UI/GameOver.show()
 	elif new_state == MainState.MAIN_MENU:
-		get_tree().paused = true
+		pause = true
 		$UI/MainMenu.show()
 	elif new_state == MainState.PAUSE:
-		get_tree().paused = true
+		pause = true
 		$UI/PauseMenu.show()
-		pass
 	
+	get_tree().paused = pause
+		
+		
 func _ready():
 	change_states(MainState.MAIN_MENU)
+	
 
-func _process(_delta):
+func _process(delta):
 
 	match GameState.main_state:
 		MainState.GAMEPLAY:
@@ -52,13 +56,13 @@ func _process(_delta):
 				change_states(MainState.GAME_OVER)
 			if Input.is_action_just_pressed("pause"):
 				change_states(MainState.PAUSE)
-				
-			var enemy_in_scene = self.find_node("@Enemy@*", true, false)
-			if not enemy_in_scene:
+			
+			time_in_level += delta
+			if time_in_level > 10.0 or Enemies.get_child_count() == 0:
 				GameState.level += 1
-				$Enemies.spawn_wave(GameState.level)
-
-					
+				Enemies.spawn_wave(GameState.level)
+				time_in_level = 0.0
+								
 		MainState.PAUSE:
 			if Input.is_action_just_pressed("pause"):
 				change_states(MainState.GAMEPLAY)

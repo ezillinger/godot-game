@@ -7,8 +7,14 @@ export var max_health = 100
 export var dead = false
 export var invincible = false
 export var flash = false
+export var pickup_radius = 225.0
+export var piercing = 1
+export var level = 0
 
 var direction = Vector2.UP
+
+var experience = 0.0
+var max_experience = 10.0
 
 const bullet = preload("res://scenes/Bullet.tscn")
 const invincibility_time = 0.5
@@ -44,6 +50,16 @@ func hit(damage):
 			health = 0
 			dead = true
 
+func add_experience(value):
+	experience += value
+	if experience >= max_experience:
+		experience -= max_experience
+		var new_powerup = Powerups.random()
+		Powerups.apply(new_powerup)
+		print("New powerup ", new_powerup)
+		level += 1
+		max_experience += level * 10
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	
@@ -76,7 +92,8 @@ func _physics_process(delta):
 	if Input.is_action_pressed("shoot") and time_since_last_shot >= seconds_per_shot:
 		var b = bullet.instance()
 		b.direction = direction
-		b.position = self.position
+		b.position = position
+		b.pierces = piercing
 		get_parent().add_child(b)
 		time_since_last_shot = 0.0
 		

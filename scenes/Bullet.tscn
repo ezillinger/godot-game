@@ -17,5 +17,3 @@ shape = SubResource( 4 )
 modulate = Color( 0.1, 1.14102, 1.4, 1 )
 scale = Vector2( 10, 10 )
 mesh = SubResource( 1 )
-
-[connection signal="area_entered" from="." to="." method="_on_Bullet_area_entered"]

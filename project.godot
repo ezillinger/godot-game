@@ -34,6 +34,9 @@ config/icon="res://icon.png"
 
 GameState="*res://scenes/GameState.gd"
 Player="*res://scenes/Player.tscn"
+Pickups="*res://scenes/Pickups.tscn"
+Enemies="*res://scenes/Enemies.tscn"
+Powerups="*res://scenes/Powerups.tscn"
 
 [display]
 

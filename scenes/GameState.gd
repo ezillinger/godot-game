@@ -7,8 +7,8 @@ enum MainState {
 	PAUSE
 }
 
-
 export var main_state = MainState.MAIN_MENU
+
 export var level = 0
 
 const screen_dims = Vector2(1920, 1080)
