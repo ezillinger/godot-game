@@ -37,6 +37,7 @@ Player="*res://scenes/Player.tscn"
 Pickups="*res://scenes/Pickups.tscn"
 Enemies="*res://scenes/Enemies.tscn"
 Powerups="*res://scenes/Powerups.tscn"
+Util="*res://scripts/Util.gd"
 
 [display]
 

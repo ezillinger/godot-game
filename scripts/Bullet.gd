@@ -25,7 +25,7 @@ func _physics_process(delta):
 			hit = true
 		
 		if hit:
-			body.hit(damage)
+			body.hit(damage, position)
 			pierces -= 1
 			if pierces == 0:
 				self.call_deferred("queue_free")

@@ -5,21 +5,22 @@ export var health = 100
 export var speed = 100
 export var damage = 30
 export var level = 1
+const pickup_chance = 0.5
 
 var forces = Vector2.ZERO
 
 func _ready():
 	pass
 
-func hit(hit_damage):
+func hit(hit_damage, where):
 	health -= hit_damage
+	get_parent().add_child(Util.make_pop_text("%d" % hit_damage, where, Color.white))
 	if health <= 0:
-		Pickups.spawn(position, level)
+		if randf() < pickup_chance:
+			Pickups.spawn(position, level)
 		queue_free()
-	
-func _process(_delta):
-	pass #move_and_collide()
-		# Player.hit(damage)
+		
+	return hit_damage
 	
 func _physics_process(delta):
 	var dir = Vector2.ZERO
@@ -38,9 +39,10 @@ func _physics_process(delta):
 	if collision:
 		var hit_force = 1200.0
 		if collision.collider.name == "Player":
-			collision.collider.hit(damage)
+			collision.collider.hit(damage, position)
 			hit_force *= 3.0
 		forces += collision.normal * hit_force
 		# print(collision.get_instance_id() == Player.get_instance_id())
 	forces *= 0.5
 
+	  
