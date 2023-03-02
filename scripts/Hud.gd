@@ -23,7 +23,6 @@ func _process(_delta):
 	
 	if max_health != Player.max_health:
 		var scale = float(Player.max_health) / max_health
-		print(scale)
 		$HealthBar.rect_size.x *= scale
 		$HealthLabel.rect_size.x *= scale
 		max_health = Player.max_health

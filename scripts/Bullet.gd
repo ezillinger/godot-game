@@ -15,7 +15,6 @@ func _physics_process(delta):
 	position += direction * speed * delta
 	
 	for body in get_overlapping_bodies():
-		print(body)
 		var is_player = body.name == "Player"
 		var is_enemy = not is_player
 		var hit = false

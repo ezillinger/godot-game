@@ -27,25 +27,38 @@ func change_states(new_state):
 			$UI/MainMenu.hide()
 		MainState.PAUSE:
 			$UI/PauseMenu.hide()
+		MainState.CHOOSE_POWERUP:
+			$UI/ItemUI.hide()
 			
-	var pause = false		
-	if new_state == MainState.GAMEPLAY:
-		pause = false
-	elif new_state == MainState.GAME_OVER:
-		pause = true
-		$UI/GameOver.show()
-	elif new_state == MainState.MAIN_MENU:
-		pause = true
-		$UI/MainMenu.show()
-	elif new_state == MainState.PAUSE:
-		pause = true
-		$UI/PauseMenu.show()
+	var pause = false
+	match new_state:
+		MainState.GAMEPLAY:
+			pause = false
+		MainState.GAME_OVER:
+			pause = true
+			$UI/GameOver.show()
+		MainState.MAIN_MENU:
+			pause = true
+			$UI/MainMenu.show()
+		MainState.PAUSE:
+			pause = true
+			$UI/PauseMenu.show()
+		MainState.CHOOSE_POWERUP:
+			pause = true
+			$UI/ItemUI.show()
 	
 	get_tree().paused = pause
 		
 		
 func _ready():
+	assert(OK == $UI/ItemUI/Card1.connect("selected", self, "_onItemSelect"))
+	assert(OK == $UI/ItemUI/Card2.connect("selected", self, "_onItemSelect"))
+	assert(OK == $UI/ItemUI/Card3.connect("selected", self, "_onItemSelect"))
 	change_states(MainState.MAIN_MENU)
+	
+func _onItemSelect(item):
+	Items.apply(item)
+	change_states(MainState.GAMEPLAY)
 	
 
 func _process(delta):
@@ -62,6 +75,12 @@ func _process(delta):
 				GameState.level += 1
 				Enemies.spawn_wave(GameState.level)
 				time_in_level = 0.0
+
+			if Player.experience > Player.max_experience:
+				Player.experience -= Player.max_experience
+				Player.max_experience = max(Player.level * 10, 10)
+				Player.level += 1
+				change_states(MainState.CHOOSE_POWERUP)
 								
 		MainState.PAUSE:
 			if Input.is_action_just_pressed("pause"):

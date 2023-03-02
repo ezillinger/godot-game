@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://scripts/Enemy.gd"
+}, {
+"base": "Node2D",
+"class": "Item",
+"language": "GDScript",
+"path": "res://scripts/Powerup.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
-"Enemy": ""
+"Enemy": "",
+"Item": ""
 }
 
 [application]
@@ -36,7 +42,7 @@ GameState="*res://scenes/GameState.gd"
 Player="*res://scenes/Player.tscn"
 Pickups="*res://scenes/Pickups.tscn"
 Enemies="*res://scenes/Enemies.tscn"
-Powerups="*res://scenes/Powerups.tscn"
+Items="*res://scenes/Items.tscn"
 Util="*res://scripts/Util.gd"
 
 [display]
@@ -49,6 +55,7 @@ window/stretch/aspect="keep"
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+theme/custom="res://resources/MainTheme.tres"
 
 [input]
 
