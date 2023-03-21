@@ -3,7 +3,7 @@ extends Node2D
 const time_to_live = 0.5
 
 func _ready():
-	assert(OK == $Timer.connect("timeout", self,"_onTimer_TimeOut"))
+	assert(OK == $Timer.connect("timeout", Callable(self, "_onTimer_TimeOut")))
 	$Timer.start(time_to_live)
 
 func _process(delta):

@@ -1,25 +1,28 @@
-[gd_resource type="ShaderMaterial" load_steps=6 format=2]
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://c5or0ay07cbdq"]
 
-[ext_resource path="res://shaders/Background.gdshader" type="Shader" id=1]
+[ext_resource type="Shader" path="res://shaders/Background.gdshader" id="1"]
 
-[sub_resource type="OpenSimplexNoise" id=2]
-period = 40.3
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_o46np"]
 
-[sub_resource type="NoiseTexture" id=1]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l6f11"]
 seamless = true
-noise = SubResource( 2 )
+noise = SubResource("FastNoiseLite_o46np")
 
-[sub_resource type="OpenSimplexNoise" id=3]
-seed = 10
-octaves = 9
-period = 0.1
-persistence = 0.369
-lacunarity = 1.87
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_urbjs"]
+seed = 93
+frequency = 0.218
+fractal_lacunarity = 0.56
+fractal_weighted_strength = 1.0
+domain_warp_amplitude = 30.124
+domain_warp_frequency = 0.193
+domain_warp_fractal_octaves = 7
+domain_warp_fractal_lacunarity = 6.134
 
-[sub_resource type="NoiseTexture" id=4]
-noise = SubResource( 3 )
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k2djc"]
+seamless_blend_skirt = 0.0
+noise = SubResource("FastNoiseLite_urbjs")
 
 [resource]
-shader = ExtResource( 1 )
-shader_param/noiseTexture = SubResource( 1 )
-shader_param/starNoiseTexture = SubResource( 4 )
+shader = ExtResource("1")
+shader_parameter/noiseTexture = SubResource("NoiseTexture2D_l6f11")
+shader_parameter/starNoiseTexture = SubResource("NoiseTexture2D_k2djc")

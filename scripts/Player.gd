@@ -1,21 +1,21 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-export var speed = 1000.0
-export var shots_per_second = 3.5
-export var shot_speed = 1.5
-export var health = 100
-export var max_health = 100
-export var dead = false
-export var invincible = false
-export var flash = false
-export var pickup_radius = 225.0
-export var piercing = 1
-export var level = 1
+@export var speed = 1000.0
+@export var shots_per_second = 3.5
+@export var shot_speed = 1.5
+@export var health = 100
+@export var max_health = 100
+@export var dead = false
+@export var invincible = false
+@export var flash = false
+@export var pickup_radius = 225.0
+@export var piercing = 1
+@export var level = 1
 
 var direction = Vector2.UP
 
-export var experience = 0.0
-export var max_experience = 10.0
+@export var experience = 0.0
+@export var max_experience = 10.0
 
 const bullet = preload("res://scenes/Bullet.tscn")
 const invincibility_time = 0.5
@@ -30,20 +30,20 @@ func _ready():
 func update_shaders():
 	var mat = get_material()
 	if flash:
-		mat.set_shader_param("flash_amount", 1.0)
-		mat.set_shader_param("flash_color", Color.white)
-		modulate = Color.white
+		mat.set_shader_parameter("flash_amount", 1.0)
+		mat.set_shader_parameter("flash_color", Color.WHITE)
+		modulate = Color.WHITE
 	elif invincible:
-		mat.set_shader_param("flash_amount", 0.5)
-		mat.set_shader_param("flash_color", Color(0.0, 0.0, 0.0, 0.0))
+		mat.set_shader_parameter("flash_amount", 0.5)
+		mat.set_shader_parameter("flash_color", Color(0.0, 0.0, 0.0, 0.0))
 	else:
-		mat.set_shader_param("flash_amount", 0.0)
-		modulate = Color.white * 1.0
+		mat.set_shader_parameter("flash_amount", 0.0)
+		modulate = Color.WHITE * 1.0
 
 
 func hit(hit_damage, where):
 	if not invincible:
-		get_parent().add_child(Util.make_pop_text("%d" % hit_damage, where, Color.red))
+		get_parent().add_child(Util.make_pop_text("%d" % hit_damage, where, Color.RED))
 		time_since_last_hit = 0.0
 		health -= hit_damage
 		flash = true
@@ -70,24 +70,24 @@ func _physics_process(delta):
 	position.x = fmod(position.x + GameState.screen_dims.x, GameState.screen_dims.x)
 	position.y = fmod(position.y + GameState.screen_dims.y, GameState.screen_dims.y)
 	
-	var velocity = Vector2.ZERO
+	var v = Vector2.ZERO
 	if Input.is_action_pressed("left"):
-		velocity.x -= 1
+		v.x -= 1
 	if Input.is_action_pressed("right"):
-		velocity.x += 1
+		v.x += 1
 	if Input.is_action_pressed("up"):
-		velocity.y -= 1
+		v.y -= 1
 	if Input.is_action_pressed("down"):
-		velocity.y += 1
+		v.y += 1
 		
 		
-	var distance = velocity.normalized() * speed * delta;
+	var distance = v.normalized() * speed * delta;
 	var _collision = move_and_collide(distance)
 	
 	var seconds_per_shot = 1 / shots_per_second
 	if Input.is_action_pressed("shoot") and time_since_last_shot >= seconds_per_shot:
-		var b = bullet.instance()
-		b.direction = velocity + direction * shot_speed
+		var b = bullet.instantiate()
+		b.direction = v + direction * shot_speed
 		b.position = position
 		b.pierces = piercing
 		get_parent().add_child(b)

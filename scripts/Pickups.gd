@@ -9,7 +9,7 @@ func _process(delta):
 	pass
 	
 func spawn(pos, level):
-	var p = pickup.instance()
+	var p = pickup.instantiate()
 	
 	p.position = pos
 	p.value = level

@@ -1,9 +1,7 @@
 shader_type canvas_item;
 
-uniform sampler2D noiseTexture;
-uniform sampler2D starNoiseTexture;
-
-const float PI = 3.14159265358979323846;
+uniform sampler2D noiseTexture : repeat_enable;
+uniform sampler2D starNoiseTexture : repeat_enable;
 
 // Takes in the UV and warps the edges, creating the spherized effect
 vec2 warp(vec2 uv){
@@ -26,7 +24,7 @@ vec3 make_stars(vec2 uv) {
 	vec4 noise2 = vec4(0.3) * texture(noiseTexture, uv * 6.4 + vec2(0.01 * time, 0.01 * time));
 	float threshold = 1.59;
 	float len = length(noise);
-	if(len > threshold){
+	if( len > threshold){
 		return vec3(0.5 + noise2.x, 
 					0.5 + noise2.y, 
 					0.8 + noise2.z) * lerp(0, 100, (len - threshold) * (len - threshold));

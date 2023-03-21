@@ -1,12 +1,13 @@
 extends Control
 
 signal selected(item)
-export var hovered = false
+@export var hovered = false
+var tween: Tween = null
 
 func _ready():
-	assert(OK == $Button.connect("pressed", self, "_on_click"))
-	assert(OK == $Button.connect("mouse_entered", self, "_on_mouse_hover", [true]))
-	assert(OK == $Button.connect("mouse_exited", self, "_on_mouse_hover", [false]))
+	assert(OK == $Button.connect("pressed", Callable(self, "_on_click")))
+	assert(OK == $Button.connect("mouse_entered", Callable(self, "_on_mouse_hover").bind(true)))
+	assert(OK == $Button.connect("mouse_exited", Callable(self, "_on_mouse_hover").bind(false)))
 		
 	
 func _process(delta):
@@ -20,9 +21,11 @@ func _on_mouse_hover(is_hovered):
 	print(is_hovered)
 	var hover_scale = 1.085
 	
-	$Tween.remove_all()
+	if tween:
+		tween.kill()
+	tween = create_tween()
 	if hovered:
-		$Tween.interpolate_property($".", "rect_scale", Vector2.ONE, Vector2.ONE * hover_scale, 0.1)
+		tween.tween_property(self, "scale", Vector2.ONE * hover_scale, 0.1)
 	else:
-		$Tween.interpolate_property($".", "rect_scale", Vector2.ONE * hover_scale, Vector2.ONE, 0.2)
-	$Tween.start()
+		tween.tween_property(self, "scale", Vector2.ONE, 0.2)
+	tween.play()

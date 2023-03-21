@@ -1,7 +1,7 @@
-extends Particles2D
+extends GPUParticles2D
 
-export var radius = 20.0
-export var value = 1
+@export var radius = 20.0
+@export var value = 1
 
 
 # Called when the node enters the scene tree for the first time.
@@ -13,7 +13,7 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if (Player.position - position).length() < Player.pickup_radius:
 		var diff = Player.position - position
 		var dir = diff.normalized()

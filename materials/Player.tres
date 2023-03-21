@@ -1,15 +1,15 @@
-[gd_resource type="ShaderMaterial" load_steps=4 format=2]
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://be2v1ildbtyy1"]
 
-[ext_resource path="res://shaders/Player.gdshader" type="Shader" id=1]
+[ext_resource type="Shader" path="res://shaders/Player.gdshader" id="1"]
 
-[sub_resource type="OpenSimplexNoise" id=4]
+[sub_resource type="FastNoiseLite" id="4"]
 
-[sub_resource type="NoiseTexture" id=5]
-noise = SubResource( 4 )
+[sub_resource type="NoiseTexture2D" id="5"]
+noise = SubResource("4")
 
 [resource]
-shader = ExtResource( 1 )
-shader_param/player_color = Plane( 0.139, 0.059, 0.632, 1 )
-shader_param/flash_color = Plane( 1, 1, 1, 1 )
-shader_param/flash_amount = null
-shader_param/noiseTexture = SubResource( 5 )
+shader = ExtResource("1")
+shader_parameter/player_color = Plane(0.139, 0.059, 0.632, 1)
+shader_parameter/flash_color = Plane(1, 1, 1, 1)
+shader_parameter/flash_amount = null
+shader_parameter/noiseTexture = SubResource("5")

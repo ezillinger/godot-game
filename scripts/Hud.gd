@@ -6,8 +6,8 @@ var max_health = 100.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	max_health = Player.max_health
-	$HealthLabel.rect_size = $HealthBar.rect_size
-	$HealthLabel.rect_position = $HealthBar.rect_position
+	$HealthLabel.size = $HealthBar.size
+	$HealthLabel.position = $HealthBar.position
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -21,9 +21,14 @@ func _process(_delta):
 	$ExperienceBar.value = Player.experience
 	$ExperienceBar.max_value = Player.max_experience
 	
+	var ms = Time.get_ticks_msec()
+	var s = ms / 1000
+	var m = s / 60
+	
+	$TimeLabel.text = "%02d:%02d" % [m % 60, s % 60]
+	
 	if max_health != Player.max_health:
 		var scale = float(Player.max_health) / max_health
-		$HealthBar.rect_size.x *= scale
-		$HealthLabel.rect_size.x *= scale
+		$HealthBar.size.x *= scale
+		$HealthLabel.size.x *= scale
 		max_health = Player.max_health
-		

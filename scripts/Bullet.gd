@@ -1,12 +1,12 @@
 extends Area2D
 class_name Bullet
 
-export var direction = Vector2.LEFT
-export var speed = 500.0
-export var damage = 50.0
-export var pierces = 1
+@export var direction = Vector2.LEFT
+@export var speed = 500.0
+@export var damage = 50.0
+@export var pierces = 1
 
-export var targets_player = false
+@export var targets_player = false
 
 func _ready():
 	pass

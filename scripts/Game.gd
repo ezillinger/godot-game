@@ -51,9 +51,9 @@ func change_states(new_state):
 		
 		
 func _ready():
-	assert(OK == $UI/ItemUI/Card1.connect("selected", self, "_onItemSelect"))
-	assert(OK == $UI/ItemUI/Card2.connect("selected", self, "_onItemSelect"))
-	assert(OK == $UI/ItemUI/Card3.connect("selected", self, "_onItemSelect"))
+	assert(OK == $UI/ItemUI/Card1.connect("selected", Callable(self, "_onItemSelect")))
+	assert(OK == $UI/ItemUI/Card2.connect("selected", Callable(self, "_onItemSelect")))
+	assert(OK == $UI/ItemUI/Card3.connect("selected", Callable(self, "_onItemSelect")))
 	change_states(MainState.MAIN_MENU)
 	
 func _onItemSelect(item):
@@ -93,7 +93,7 @@ func _on_restart():
 	new_game()
 
 func _on_exit():
-	get_tree().notification(MainLoop.NOTIFICATION_WM_QUIT_REQUEST)
+	get_tree().notification(NOTIFICATION_WM_CLOSE_REQUEST)
 
 func _on_resume():
 	change_states(MainState.GAMEPLAY)

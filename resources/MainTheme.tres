@@ -1,28 +1,28 @@
-[gd_resource type="Theme" load_steps=7 format=2]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://c5rjty2cwc0hw"]
 
-[ext_resource path="res://resources/main_font.tres" type="DynamicFont" id=1]
+[ext_resource type="FontFile" uid="uid://djnedhutcohdu" path="res://resources/main_font.tres" id="1"]
 
-[sub_resource type="StyleBoxEmpty" id=1]
+[sub_resource type="StyleBoxEmpty" id="1"]
 
-[sub_resource type="StyleBoxEmpty" id=2]
+[sub_resource type="StyleBoxEmpty" id="2"]
 
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 1, 1, 1, 1 )
+[sub_resource type="StyleBoxFlat" id="6"]
+bg_color = Color(1, 1, 1, 1)
 
-[sub_resource type="StyleBoxEmpty" id=4]
+[sub_resource type="StyleBoxEmpty" id="4"]
 
-[sub_resource type="StyleBoxEmpty" id=5]
+[sub_resource type="StyleBoxEmpty" id="5"]
 
 [resource]
-default_font = ExtResource( 1 )
-Button/colors/font_color = Color( 0.88, 0.88, 0.88, 1 )
-Button/colors/font_color_disabled = Color( 0.9, 0.9, 0.9, 0.2 )
-Button/colors/font_color_focus = Color( 0.94, 0.94, 0.94, 1 )
-Button/colors/font_color_hover = Color( 1.69412, 1.64314, 1.6902, 1 )
-Button/colors/font_color_pressed = Color( 2, 2, 2, 1 )
+default_font = ExtResource("1")
+Button/colors/font_color = Color(0.88, 0.88, 0.88, 1)
+Button/colors/font_color_disabled = Color(0.9, 0.9, 0.9, 0.2)
+Button/colors/font_color_focus = Color(0.94, 0.94, 0.94, 1)
+Button/colors/font_color_hover = Color(1.69412, 1.64314, 1.6902, 1)
+Button/colors/font_color_pressed = Color(2, 2, 2, 1)
 Button/constants/hseparation = 2
-Button/styles/disabled = SubResource( 1 )
-Button/styles/focus = SubResource( 2 )
-Button/styles/hover = SubResource( 6 )
-Button/styles/normal = SubResource( 4 )
-Button/styles/pressed = SubResource( 5 )
+Button/styles/disabled = SubResource("1")
+Button/styles/focus = SubResource("2")
+Button/styles/hover = SubResource("6")
+Button/styles/normal = SubResource("4")
+Button/styles/pressed = SubResource("5")

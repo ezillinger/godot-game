@@ -10,57 +10,57 @@ theme = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 1924.0
-margin_bottom = 1076.0
+offset_right = 1924.0
+offset_bottom = 1076.0
 color = Color( 0, 0, 0, 0.494118 )
 
 [node name="PauseLabel" type="Label" parent="."]
 modulate = Color( 1.1, 1.1, 1.1, 1 )
-margin_top = 280.0
-margin_right = 639.0
-margin_bottom = 328.0
-rect_scale = Vector2( 3, 3 )
+offset_top = 280.0
+offset_right = 639.0
+offset_bottom = 328.0
+scale = Vector2( 3, 3 )
 size_flags_vertical = 6
 text = "Paused"
 align = 1
 valign = 1
 
 [node name="ExitButton" type="Button" parent="."]
-margin_left = 895.0
-margin_top = 699.0
-margin_right = 959.0
-margin_bottom = 715.0
-rect_scale = Vector2( 2, 2 )
+offset_left = 895.0
+offset_top = 699.0
+offset_right = 959.0
+offset_bottom = 715.0
+scale = Vector2( 2, 2 )
 size_flags_vertical = 6
 text = "Quit"
 flat = true
 
 [node name="ResumeButton" type="Button" parent="."]
-margin_left = 835.0
-margin_top = 525.0
-margin_right = 947.0
-margin_bottom = 541.0
-rect_scale = Vector2( 2, 2 )
+offset_left = 835.0
+offset_top = 525.0
+offset_right = 947.0
+offset_bottom = 541.0
+scale = Vector2( 2, 2 )
 size_flags_vertical = 6
 text = "Resume"
 flat = true
 
 [node name="RestartButton" type="Button" parent="."]
-margin_left = 847.0
-margin_top = 584.0
-margin_right = 959.0
-margin_bottom = 600.0
-rect_scale = Vector2( 2, 2 )
+offset_left = 847.0
+offset_top = 584.0
+offset_right = 959.0
+offset_bottom = 600.0
+scale = Vector2( 2, 2 )
 size_flags_vertical = 6
 text = "Restart"
 flat = true
 
 [node name="MainMenuButton" type="Button" parent="."]
-margin_left = 815.0
-margin_top = 641.0
-margin_right = 959.0
-margin_bottom = 657.0
-rect_scale = Vector2( 2, 2 )
+offset_left = 815.0
+offset_top = 641.0
+offset_right = 959.0
+offset_bottom = 657.0
+scale = Vector2( 2, 2 )
 size_flags_vertical = 6
 text = "Main Menu"
 flat = true

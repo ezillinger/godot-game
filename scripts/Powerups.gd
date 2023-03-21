@@ -15,10 +15,10 @@ static func apply(type):
 			Player.shots_per_second += 1.0
 
 static func random():
-	return int(round(rand_range(0.0, float(ItemType.NUM_TYPES))))
+	return int(round(randf_range(0.0, float(ItemType.NUM_TYPES))))
 
 static func make_item(type):
-	var ret = item.instance()
+	var ret = item.instantiate()
 	ret.type = type
 	match type:
 		ItemType.MAX_HEALTH_UP:
