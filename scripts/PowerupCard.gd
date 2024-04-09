@@ -3,6 +3,9 @@ extends Control
 signal selected(item)
 @export var hovered = false
 var tween: Tween = null
+var item : Item = Items.make_item(Items.random())
+@onready var nameLabel : RichTextLabel = $NameLabel
+@onready var descLabel : RichTextLabel = $DescriptionLabel
 
 func _ready():
 	assert(OK == $Button.connect("pressed", Callable(self, "_on_click")))
@@ -11,6 +14,8 @@ func _ready():
 		
 	
 func _process(delta):
+	nameLabel.text = item.name
+	descLabel.text = item.description
 	pass
 	
 func _on_click():

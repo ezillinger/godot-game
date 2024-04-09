@@ -15,7 +15,7 @@ static func apply(type):
 			Player.shots_per_second += 1.0
 
 static func random():
-	return int(round(randf_range(0.0, float(ItemType.NUM_TYPES))))
+	return randi_range(0, ItemType.NUM_TYPES - 1)
 
 static func make_item(type):
 	var ret = item.instantiate()

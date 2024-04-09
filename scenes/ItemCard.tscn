@@ -20,7 +20,7 @@ offset_right = 600.0
 offset_bottom = 800.0
 color = Color(0, 0, 0, 1)
 
-[node name="NameLabel" type="Label" parent="."]
+[node name="NameLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
 offset_left = 39.0
 offset_top = 43.0
@@ -28,7 +28,9 @@ offset_right = 215.0
 offset_bottom = 65.0
 scale = Vector2(3, 3)
 theme = ExtResource("1")
-text = "Lunch"
+text = "A Very Point Fork"
+fit_content = true
+scroll_active = false
 
 [node name="Picture" type="TextureRect" parent="."]
 layout_mode = 0

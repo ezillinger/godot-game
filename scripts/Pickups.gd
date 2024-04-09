@@ -5,7 +5,7 @@ const pickup = preload("res://scenes/Pickup.tscn")
 func _ready():
 	pass
 
-func _process(delta):
+func _process(_delta):
 	pass
 	
 func spawn(pos, level):

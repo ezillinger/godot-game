@@ -28,7 +28,7 @@ func _process(_delta):
 	$TimeLabel.text = "%02d:%02d" % [m % 60, s % 60]
 	
 	if max_health != Player.max_health:
-		var scale = float(Player.max_health) / max_health
-		$HealthBar.size.x *= scale
-		$HealthLabel.size.x *= scale
+		var scale_ = float(Player.max_health) / max_health
+		$HealthBar.size.x *= scale_
+		$HealthLabel.size.x *= scale_
 		max_health = Player.max_health

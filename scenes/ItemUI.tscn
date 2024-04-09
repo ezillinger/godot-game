@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://b28du3fsnmor0"]
+[gd_scene load_steps=4 format=3 uid="uid://b28du3fsnmor0"]
 
 [ext_resource type="PackedScene" uid="uid://bbecbj3xp01fx" path="res://scenes/ItemCard.tscn" id="1"]
+[ext_resource type="Script" path="res://scripts/ItemUI.gd" id="1_ipotu"]
 [ext_resource type="Theme" uid="uid://c5rjty2cwc0hw" path="res://resources/MainTheme.tres" id="2"]
 
 [node name="ItemUI" type="Control"]
@@ -9,6 +10,7 @@ anchors_preset = 0
 offset_right = 2259.0
 offset_bottom = 1271.0
 scale = Vector2(0.85, 0.85)
+script = ExtResource("1_ipotu")
 
 [node name="Card1" parent="." instance=ExtResource("1")]
 process_priority = -23
